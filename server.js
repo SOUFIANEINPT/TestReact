@@ -8,8 +8,7 @@ var port = 3000;
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 //Static Folder
-app.use(express.static(path.join(__dirname, 'client')));
-app.use(express.static(path.join(__dirname, 'client1')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 //body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
