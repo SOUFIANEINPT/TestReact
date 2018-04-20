@@ -50,13 +50,15 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-    	response:'', 	
+      responseState:[], 
+      result=""	
     }
   }
   componentWillMount()
   {
-    axios.get().then(function (response) {
+    axios.get("http://localhost:3000/api/tasks").then(function (response) {
       texts.question=response.question;
+      this.setState({responseState:response.response})
     })
     .catch(function (error) {
       console.log(error);
@@ -73,21 +75,21 @@ class App extends React.Component {
               <div 
                style={styles.nonDiv}
                onClick={()=>{
-                 this.setState({response:'Zut !'})
+                 this.setState({result:this.state.responseState[1]})
                }}>
                   <h4 style={{color:'#8080ff'}}>non</h4>
               </div>
               <div 
                style={styles.ouiDiv}
                onClick={()=>{
-                 this.setState({response:'Bon choix !'})
+                 this.setState({result:this.state.responseState[0]})
                }}>
                   <h4 style={{color:'white'}}>oui</h4>
               </div>
            </div>
          </div>
          <div style={{display:'flex',justifyContent:'center'}}>
-           {this.state.response?<h4 style={{color:this.state.response=='Zut !'?'red':'green'}}>{this.state.response}</h4>:null}
+           {this.state.result?<h4 style={{color:this.state.result=='Zut !'?'red':'green'}}>{this.state.response}</h4>:null}
          </div>
       </div>
      
