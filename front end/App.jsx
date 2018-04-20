@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 const styles={
   globalDiv:{
     width:'100%',
@@ -42,8 +42,8 @@ const styles={
   }
 }
 
-const texts={
-  question:'Aimez-vous React?'
+var texts={
+  question:''
 }
 
 class App extends React.Component {
@@ -53,7 +53,15 @@ class App extends React.Component {
     	response:'', 	
     }
   }
-  
+  componentWillMount()
+  {
+    axios.get().then(function (response) {
+      texts.question=response.question;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
   render() {
     return (
       <div style={{width:'100%'}}>
